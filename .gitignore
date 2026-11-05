@@ -1,0 +1,40 @@
+# ---- Data (never commit raw or large processed data) ----
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+*.gz
+*.tsv
+*.csv.gz
+*.parquet
+*.h5
+*.h5ad
+*.rds
+*.RData
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- R ----
+.Rhistory
+.Rproj.user/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---- Secrets ----
+.env
+*.key
