@@ -18,9 +18,9 @@
 
 import pandas as pd
 
-# ----------------------------------------------------------------------------
+
 # Settings
-# ----------------------------------------------------------------------------
+# ----------------
 RAW = "data/raw/"
 PROC = "data/processed/"
 TABLES = "results/tables/"
@@ -44,9 +44,9 @@ print("annotation probes:", len(annot))
 print("chromosome labels in the annotation file:")
 print(annot["chrom"].value_counts().to_string())
 
-# ----------------------------------------------------------------------------
+
 # Filter the methylation matrix for each zero-time rule
-# ----------------------------------------------------------------------------
+
 for rule in RULES:
     meth = pd.read_pickle(PROC + "methylation_" + rule + ".pkl")   # probes x patients
     summary = {"zero_time_rule": rule, "probes_start": len(meth)}
