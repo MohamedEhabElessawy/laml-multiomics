@@ -4,10 +4,17 @@
 #     python scripts/02_preprocess.py
 #
 # Output files:
-#     data/processed/mrna.pkl           genes  x patients  (ignored by git)
-#     data/processed/methylation.pkl    probes x patients  (ignored by git)
-#     data/processed/survival.csv       PatientID, Survival, Death
-#     results/tables/cohort_summary.csv every number below (this one IS committed)
+#     if ZERO_TIME_RULE = "floor"
+#     data/processed/mrna_floor.pkl           genes  x patients  (ignored by git)
+#     data/processed/methylation_floor.pkl    probes x patients  (ignored by git)
+#     data/processed/survival_floor.csv       PatientID, Survival, Death
+#     results/tables/cohort_summary_floor.csv every number below (this one IS committed)
+
+#     if ZERO_TIME_RULE = "drop"
+#     data/processed/mrna_drop.pkl           genes  x patients  (ignored by git)
+#     data/processed/methylation_drop.pkl    probes x patients  (ignored by git)
+#     data/processed/survival_drop.csv       PatientID, Survival, Death
+#     results/tables/cohort_summary_drop.csv every number below (this one IS committed)
 
 import pandas as pd
 
@@ -88,9 +95,9 @@ cohort_set = set(cohort)
 
 survival = survival.set_index("PatientID").loc[cohort].reset_index()
 
-# ----------------------------------------------------------------------------
+
 # STEP 3: mRNA (genes x samples)
-# ----------------------------------------------------------------------------
+# ------------------------------
 mrna = pd.read_csv(RAW + "HiSeqV2", sep="\t", index_col=0)
 
 # keep only the tumor samples of cohort patients
@@ -106,9 +113,9 @@ summary["genes_before"] = len(mrna)
 mrna = mrna[mrna.std(axis=1) > 0]
 summary["genes_after"] = len(mrna)
 
-# ----------------------------------------------------------------------------
+
 # STEP 4: methylation (probes x samples), read in chunks
-# ----------------------------------------------------------------------------
+# ----------------------------
 # We load only the columns we need (cohort tumor samples), which cuts memory a
 # lot, and store numbers as float32 (half the memory of the default float64).
 id_col = meth_header[0]
@@ -132,7 +139,7 @@ meth = meth[cohort]                             # cohort order
 summary["probes_before"] = n_probes
 summary["probes_after"] = len(meth)
 
-# ----------------------------------------------------------------------------
+
 # STEP 5: safety checks, then save
 # ----------------------------------------------------------------------------
 # Every table must contain exactly the same patients in exactly the same order.
@@ -144,8 +151,8 @@ summary["cohort_patients"] = len(cohort)
 summary["cohort_events"] = int(survival["Death"].sum())
 summary["cohort_censored"] = int((survival["Death"] == 0).sum())
 
-# .pkl is pandas' own fast binary format: no extra libraries needed. Only open
-# .pkl files that you created yourself.
+
+# .pkl files that created.
 mrna.to_pickle(OUT + "mrna_" + ZERO_TIME_RULE + ".pkl")
 meth.to_pickle(OUT + "methylation_" + ZERO_TIME_RULE + ".pkl")
 survival.to_csv(OUT + "survival_" + ZERO_TIME_RULE + ".csv", index=False)
