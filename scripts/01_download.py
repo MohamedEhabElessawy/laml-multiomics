@@ -1,8 +1,5 @@
 """Step 1: download the three Xena files into data/raw/.
 
-TODO: paste the exact Xena download URLs into data/README.md, then list them
-in DATASETS below. Files are saved with their original names and skipped if
-they already exist.
 """
 
 from pathlib import Path
