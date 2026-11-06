@@ -1,0 +1,14 @@
+item,value
+survival_rows,200
+redacted_dropped,0
+missing_os_dropped,14
+zero_time_patients,13
+zero_time_events,12
+zero_time_rule,floor
+genes_before,20530
+genes_after,19899
+probes_before,485577
+probes_after,393360
+cohort_patients,158
+cohort_events,101
+cohort_censored,57
