@@ -11,9 +11,9 @@ RAW_DIR = Path(__file__).resolve().parents[1] / "data" / "raw"
 
 # name -> URL (fill in from the Xena dataset pages)
 DATASETS: dict[str, str] = {
-    # "mrna": "https://.../HiSeqV2.gz",
-    # "methylation": "https://.../HumanMethylation450.gz",
-    # "survival": "https://.../LAML_survival.txt",
+     "mrna": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.LAML.sampleMap%2FHiSeqV2.gz",
+     "methylation": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.LAML.sampleMap%2FHumanMethylation450.gz",
+     "survival": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/survival%2FLAML_survival.txt",
 }
 
 
