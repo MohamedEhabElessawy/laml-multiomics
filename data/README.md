@@ -10,6 +10,7 @@ All three files were downloaded on 2026-11-06.
 |---|---|---|---|
 | mRNA | gene expression RNAseq (IlluminaHiSeq) | https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.LAML.sampleMap%2FHiSeqV2.gz | log2(x+1) RSEM normalized counts; 20,530 genes x 173 samples |
 | Methylation | Illumina Human Methylation 450K | https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.LAML.sampleMap%2FHumanMethylation450.gz | beta values (0-1); 485,577 probes x 194 samples; ~164 MB compressed, ~595 MB uncompressed |
+| Methylation Probe Map | ID/Gene Mapping (illuminaMethyl450_hg19_GPL16304_TCGAlegacy) | https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/probeMap%2FilluminaMethyl450_hg19_GPL16304_TCGAlegacy | Probe ID to gene mapping (hg19 / GPL16304) for Illumina HumanMethylation450 |
 | Survival | Curated survival data | https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/survival%2FLAML_survival.txt | 200 patients; OS (event), OS.time (days), plus DSS, DFI, PFI and Redaction columns |
 
 ## File names in `data/raw/`
