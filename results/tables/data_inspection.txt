@@ -1,0 +1,61 @@
+
+== mRNA (HiSeqV2)
+  samples (columns): 173
+  unique patients:   173
+  sample type codes: {'03': 173}
+  patients with >1 sample: 0 []
+
+== methylation (450K)
+  samples (columns): 194
+  unique patients:   194
+  sample type codes: {'03': 194}
+  patients with >1 sample: 0 []
+
+== survival
+  rows: 200  columns: ['sample', '_PATIENT', 'OS', 'OS.time', 'DSS', 'DSS.time', 'DFI', 'DFI.time', 'PFI', 'PFI.time', 'Redaction']
+  sample type codes: {'03': 200}
+  unique patients:   200
+  missing OS: 0  missing OS.time: 14
+  usable rows (OS and OS.time present): 186
+  events (OS=1): 120  censored (OS=0): 66
+  OS.time <= 0: 13
+  OS.time summary:
+    count     186.0
+    mean      560.8
+    std       589.8
+    min         0.0
+    25%       153.0
+    50%       365.0
+    75%       753.5
+    max      2861.0
+
+== patient overlap
+  mRNA & methylation:               170
+  mRNA & survival:                  161
+  methylation & survival:           180
+  all three layers (usable cohort): 158
+
+== survival: Redaction column (all rows)
+  Redaction
+  NaN    200
+
+== survival QC inside the 158-patient cohort
+  events (OS=1): 101  censored (OS=0): 57
+  OS.time <= 0: 12  (events: 11, censored: 1)
+  redacted patients in cohort: 0
+  OS.time summary (days):
+    count     158.0
+    mean      564.7
+    std       589.3
+    min         0.0
+    25%       153.0
+    50%       350.0
+    75%       792.0
+    max      2861.0
+
+== mRNA values
+  shape (genes x samples): (20530, 173)  NaN cells: 0
+  min 0.00  max 19.97
+
+== methylation NA scan (chunked)
+  probes: 485577  with any NA: 92425  with >20% NA: 89857
