@@ -11,7 +11,7 @@
 
 import pandas as pd
 
-# ----------------------------------------------------------------------------
+
 # Settings (change these here, then rerun)
 # ----------------------------------------------------------------------------
 RAW = "data/raw/"
@@ -21,16 +21,16 @@ TABLES = "results/tables/"
 # What to do with patients whose OS.time is 0 or negative:
 #   "drop"  -> remove them from the cohort
 #   "floor" -> keep them and set their time to FLOOR_DAYS
-ZERO_TIME_RULE = "drop"
+ZERO_TIME_RULE = "floor"
 FLOOR_DAYS = 1
 
 CHUNKSIZE = 50000   # methylation rows read at a time (keeps memory low)
 
 summary = {}        # we collect every number here and save it at the end
 
-# ----------------------------------------------------------------------------
+
 # STEP 1: survival table (one row per patient)
-# ----------------------------------------------------------------------------
+
 surv = pd.read_csv(RAW + "survival_LAML_survival.txt", sep="\t")
 summary["survival_rows"] = len(surv)
 
@@ -146,10 +146,9 @@ summary["cohort_censored"] = int((survival["Death"] == 0).sum())
 
 # .pkl is pandas' own fast binary format: no extra libraries needed. Only open
 # .pkl files that you created yourself.
-mrna.to_pickle(OUT + "mrna.pkl")
-meth.to_pickle(OUT + "methylation.pkl")
-survival.to_csv(OUT + "survival.csv", index=False)
-pd.Series(summary, name="value").rename_axis("item").to_csv(TABLES + "cohort_summary.csv")
+mrna.to_pickle(OUT + "mrna_" + ZERO_TIME_RULE + ".pkl")
+meth.to_pickle(OUT + "methylation_" + ZERO_TIME_RULE + ".pkl")
+survival.to_csv(OUT + "survival_" + ZERO_TIME_RULE + ".csv", index=False)
 
 print("== cohort summary")
 for key, value in summary.items():
