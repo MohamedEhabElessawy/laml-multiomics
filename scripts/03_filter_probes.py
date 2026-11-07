@@ -53,7 +53,8 @@ for rule in RULES:
 
     # 1. Keep only probes that appear in the annotation.
     #    isin() gives True/False per probe; ~ means "not".
-    in_annotation = meth.index.isin(annot.index)
+    mapped = annot.index[annot["chrom"] != "nan"] 
+    in_annotation = meth.index.isin(mapped)
     summary["probes_not_in_annotation"] = int((~in_annotation).sum())
     meth = meth[in_annotation]
 
