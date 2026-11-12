@@ -1,7 +1,7 @@
 # Step 0: inspect the raw Xena files before initializing anything.
 #
 # Run from the project root (the folder that contains README.md):
-#     python scripts/00_inspect.py
+#     python scripts/01_inspect.py
 #
 # Nothing is saved or modified here. We only doing data inspection.
 

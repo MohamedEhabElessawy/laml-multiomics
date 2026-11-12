@@ -1,54 +1,50 @@
-# LAML Multi-Omics: Survival Modeling with mRNA and DNA Methylation
+# LAML multi-omics: do mRNA and methylation patterns relate to AML survival?
 
-Integrative analysis of TCGA acute myeloid leukemia (TCGA-LAML) combining gene expression (RNA-seq) and DNA methylation (450K) to model overall survival.
+Integrative analysis of TCGA-LAML (acute myeloid leukemia) with MOFA, following the integration workflow of ElHarouni et al., *Cancer Research* 2026;86:773-84.
 
-> Status: project skeleton. Update this section as work progresses.
+## Question
 
-## Research question
+Do the latent factors that MOFA learns from mRNA expression and DNA methylation relate to overall survival, independent of age?
 
-Do mRNA expression and DNA methylation profiles, alone or combined, carry prognostic information for overall survival in TCGA-LAML, beyond what either layer provides alone?
+Optional extension (not started): do the factors improve survival prediction in held-out patients compared with clinical variables alone?
 
-## Data (UCSC Xena, TCGA LAML hub)
+## Data
 
-| Layer | Xena dataset | Notes |
+UCSC Xena, TCGA LAML cohort: gene expression (HiSeq), DNA methylation (450K), curated survival, and the clinical table. Sources, file names and download links are in [`data/README.md`](data/README.md). Raw and processed data are not committed to this repository.
+
+Cohort: patients present in all three layers with valid survival: 158 (101 deaths, 57 censored), or 146 (90 deaths) when patients with survival time 0 are dropped.
+
+## Pipeline
+
+Run the scripts from the project root, in order; then the notebooks from the `notebooks/` folder.
+
+| Script | What it does | Main output |
 |---|---|---|
-| mRNA | gene expression RNAseq, IlluminaHiSeq (n=173) | log2(x+1) RSEM normalized counts |
-| Methylation | Illumina Human Methylation 450K | ~485k probes; single platform only (no 27K mixing) |
-| Survival | Curated survival data | `OS` (event), `OS.time` |
+| `scripts/01_inspect.py` | Prints sample counts, patient overlap and missing values of the raw files | printed report |
+| `scripts/02_preprocess.py` | Builds the cohort and cleans mRNA and methylation | `data/processed/*.pkl`, `results/tables/cohort_summary_*.csv` |
+| `scripts/03_filter_probes.py` | Removes sex-chromosome and unannotated methylation probes | `methylation_filtered_*.pkl` |
+| `scripts/04_clinical.py` | Attaches age, sex, risk group, FAB subtype, white cell count; cross-checks survival times | `data/processed/clinical_*.csv` |
+| `notebooks/01_explore.ipynb` | Survival curve, distributions, PCA | `results/figures/` |
+| `notebooks/02_mofa.ipynb` | Trains MOFA, reads the factors (variance, clinical variables, top genes/probes), tests each factor against survival with age in the model, robustness checks | `data/processed/mofa/`, `results/tables/mofa_*.csv`, `results/figures/` |
 
-Exact download links and dataset IDs are recorded in [`data/README.md`](data/README.md). Raw data is not committed to this repository.
+Zero-time patients (12 deaths with survival time recorded as 0) are handled by `ZERO_TIME_RULE` in `02_preprocess.py`: `floor` keeps them at 1 day (working choice), `drop` removes them (kept for a sensitivity check).
 
-## Design decisions
+## Environment
 
-- Tumor samples only for omics layers; normals (sample code `-11`) excluded.
-- Patients matched across layers by the first 12 characters of the TCGA barcode.
-- All feature selection and scaling are fit inside cross-validation folds only, to avoid data leakage.
-- Small cohort (~150 patients) and p >> n: regularized models and nested/repeated CV; random seeds fixed and recorded.
-
-## Repository layout
-
-```
-data/raw/         downloaded Xena files (git-ignored)
-data/processed/   cleaned, aligned matrices (git-ignored)
-scripts/          numbered pipeline steps, run in order
-src/laml/         reusable functions imported by scripts and notebooks
-notebooks/        exploration and final report (outputs cleared before commit)
-results/          figures and small tables (committed)
-```
-
-## Reproducing
+One environment, called `laml` (Python 3.11 recommended; MOFA needs muon, mofax, mofapy2):
 
 ```bash
-conda env create -f environment.yml
-conda activate laml-multiomics
-python scripts/01_download.py
-python scripts/02_preprocess.py
-python scripts/03_intersect.py
-python scripts/04_model.py
+conda create -n laml python=3.11
+conda activate laml
+pip install -r requirements.txt
 ```
 
-Scripts are stubs at this stage and are filled in step by step.
+To record exactly what is installed in your working `laml` environment: `pip freeze > requirements-freeze.txt`.
 
-## License
+## Status
 
-To be decided. TCGA data are subject to their own terms of use.
+- Done: data download, cohort, cleaning, probe filtering, clinical table, exploration.
+- Done (trial): first MOFA run and an unadjusted Cox model on the factors (see `docs/project_notes.md`).
+- Next: run `notebooks/02_mofa.ipynb` on the real data (age-adjusted Cox per factor, factor-versus-clinical table, robustness); read the top genes and probes of the factors that matter.
+
+Decisions, findings and open items: [`docs/project_notes.md`](docs/project_notes.md).

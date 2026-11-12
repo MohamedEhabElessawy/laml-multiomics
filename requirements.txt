@@ -1,0 +1,20 @@
+# One environment for the whole project, called "laml":
+#   conda create -n laml python=3.11
+#   conda activate laml
+#   pip install -r requirements.txt
+# Versions below were tested together (Python 3.11). To record what is installed in your
+# own laml environment instead:  pip freeze > requirements-freeze.txt
+anndata==0.12.17
+mofapy2==0.7.4
+mofax==0.3.7
+mudata==0.3.8
+muon==0.1.7
+numpy==2.4.6
+pandas==2.3.3
+scanpy==1.11.5
+scikit-learn==1.9.0
+scipy
+matplotlib
+ipykernel
+ipywidgets   # removes the tqdm "IProgress not found" warning
+lifelines    # Cox models and Kaplan-Meier curves

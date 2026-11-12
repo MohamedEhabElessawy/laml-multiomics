@@ -28,7 +28,7 @@ TABLES = "results/tables/"
 # What to do with patients whose OS.time is 0 or negative:
 #   "drop"  -> remove them from the cohort
 #   "floor" -> keep them and set their time to FLOOR_DAYS
-ZERO_TIME_RULE = "floor"
+ZERO_TIME_RULE = "drop"
 FLOOR_DAYS = 1
 
 CHUNKSIZE = 50000   # methylation rows read at a time (keeps memory low)

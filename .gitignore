@@ -38,3 +38,8 @@ Thumbs.db
 # ---- Secrets ----
 .env
 *.key
+
+# ---- Model files ----
+*.hdf5
+*.pkl
+models/
