@@ -31,15 +31,14 @@ Zero-time patients (12 deaths with survival time recorded as 0) are handled by `
 
 ## Environment
 
-One environment, called `laml` (Python 3.11 recommended; MOFA needs muon, mofax, mofapy2):
+One conda environment, called `laml` (Python 3.11), defined in [`environment.yml`](environment.yml):
 
 ```bash
-conda create -n laml python=3.11
+conda env create -f environment.yml
 conda activate laml
-pip install -r requirements.txt
 ```
 
-To record exactly what is installed in your working `laml` environment: `pip freeze > requirements-freeze.txt`.
+To update the file after installing something new: `conda env export --no-builds > environment.yml`, then delete the `prefix:` line at the bottom.
 
 ## Status
 
