@@ -11,8 +11,8 @@ All from UCSC Xena, TCGA LAML cohort hub. Downloaded 2026-11-06 (mRNA, methylati
 | `HiSeqV2` | gene expression RNAseq (IlluminaHiSeq) | https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.LAML.sampleMap%2FHiSeqV2.gz | log2(x+1) RSEM; 20,530 genes x 173 samples |
 | `HumanMethylation450` | Illumina Human Methylation 450K | https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.LAML.sampleMap%2FHumanMethylation450.gz | beta values (0-1); 485,577 probes x 194 samples; ~595 MB uncompressed |
 | `survival_LAML_survival.txt` | curated survival data | https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/survival%2FLAML_survival.txt | 200 patients; OS (event), OS.time (days) |
-| `TCGA.LAML.sampleMap_LAML_clinicalMatrix` | phenotype / clinical matrix | TODO: paste the Xena URL | 200 patients; age, sex, cytogenetic risk, FAB subtype, blood counts |
-| `probeMap_illuminaMethyl450_hg19_GPL16304_TCGAlegacy` | ID/Gene mapping for the 450K array | TODO: paste the Xena URL | 395,985 probes with chromosome and position |
+| `TCGA.LAML.sampleMap_LAML_clinicalMatrix` | phenotype / clinical matrix | https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.LAML.sampleMap%2FLAML_clinicalMatrix | 200 patients; age, sex, cytogenetic risk, FAB subtype, blood counts |
+| `probeMap_illuminaMethyl450_hg19_GPL16304_TCGAlegacy` | ID/Gene mapping for the 450K array | https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/probeMap%2FilluminaMethyl450_hg19_GPL16304_TCGAlegacy | 395,985 probes with chromosome and position |
 
 ## Sample barcode convention
 
