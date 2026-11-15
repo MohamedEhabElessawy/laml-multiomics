@@ -1,6 +1,6 @@
 # LAML multi-omics: do mRNA and methylation patterns relate to AML survival?
 
-Integrative analysis of TCGA-LAML (acute myeloid leukemia) with MOFA, following the integration workflow of ElHarouni et al., *Cancer Research* 2026;86:773-84.
+Integrative analysis of TCGA-LAML (acute myeloid leukemia) with MOFA+.
 
 ## Question
 
