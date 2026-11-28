@@ -1,6 +1,6 @@
 # LAML multi-omics: do mRNA and methylation patterns relate to AML survival?
 
-Integrative analysis of TCGA-LAML (acute myeloid leukemia) with MOFA+.
+Integrative analysis of TCGA-LAML (acute myeloid leukemia) with MOFA, following the integration workflow of ElHarouni et al., *Cancer Research* 2026;86:773-84.
 
 ## Question
 
@@ -43,7 +43,8 @@ To update the file after installing something new: `conda env export --no-builds
 ## Status
 
 - Done: data download, cohort, cleaning, probe filtering, clinical table, exploration.
-- Done (trial): first MOFA run and an unadjusted Cox model on the factors (see `docs/project_notes.md`).
-- Next: run `notebooks/02_mofa.ipynb` on the real data (age-adjusted Cox per factor, factor-versus-clinical table, robustness); read the top genes and probes of the factors that matter.
+- Done: MOFA on mRNA + methylation (12 factors); factors compared with clinical variables; survival tests per factor with age, then with age + cytogenetic risk; Kaplan-Meier curves; top genes; robustness checks.
+- Main result so far: one factor (Factor 3, HOXA-cluster program) is associated with survival independent of age, but not independent of cytogenetic risk (see `docs/project_notes.md`).
+- Next: separate Factor 3 from risk group, check stability across random starts, map CpG sites to genes, write the summary.
 
 Decisions, findings and open items: [`docs/project_notes.md`](docs/project_notes.md).
