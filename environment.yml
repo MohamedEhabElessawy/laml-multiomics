@@ -21,4 +21,5 @@ dependencies:
       - scanpy==1.11.5
       - scikit-learn==1.9.1
       - scipy==1.17.1
+      - seaborn==0.13.2
       - ipykernel==7.4.0
